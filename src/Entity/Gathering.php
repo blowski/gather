@@ -18,6 +18,11 @@ class Gathering
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $name;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\HomeGroup", inversedBy="gatherings")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -125,6 +130,17 @@ class Gathering
     public function setPassage($passage)
     {
         $this->passage = $passage;
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
         return $this;
     }
 }

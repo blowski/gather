@@ -37,7 +37,7 @@
                 <div class="card-body">
                     <ul>
                     {% for gathering in homeGroup.gatherings %}
-                        <li><a href="{{ url('gathering_show', {'id':gathering.id}) }}">{{ gathering.startDate|date('d M y') }} - {{ gathering.endDate|date('d M y') }}</a></li>
+                        <li><a href="{{ url('gathering_show', {'id':gathering.id}) }}">{{ gathering.name }} ({{ gathering.startDate|date('d M y') }} - {{ gathering.endDate|date('d M y') }})</a></li>
                     {% endfor %}
                     </ul>
                 </div>

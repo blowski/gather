@@ -4,11 +4,11 @@
 
 
     <div class="page-header">
-        <h4 class="page-title">Gathering</h4>
+        <h4 class="page-title">{{ gathering.name }}</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('homegroup_show', {'id':gathering.homeGroup.id}) }}">{{ gathering.homeGroup.name }}</a></li>
             <li class="breadcrumb-item"><a href="{{ url('gathering_list', {'id':gathering.homeGroup.id}) }}">Gatherings</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ gathering.startDate|date('d M y') }} - {{ gathering.endDate|date('d M y') }}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ gathering.name }} ({{ gathering.startDate|date('d M y') }} - {{ gathering.endDate|date('d M y') }})</li>
         </ol>
     </div>
 
