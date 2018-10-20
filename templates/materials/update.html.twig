@@ -1,0 +1,26 @@
+{% extends 'authenticated-base.html.twig' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h4 class="page-title">{{ material.name }}</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_start(form, {'attr':{'class':'card'}}) }}
+                <div class="card-body">
+                    {{ form_widget(form) }}
+                </div>
+                <div class="card-footer text-right">
+                    <div class="d-flex">
+                        <a href="{{ url('materials_list') }}" class="btn btn-link">Cancel</a>
+                        <button type="submit" class="btn btn-primary ml-auto">Update material</button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock content %}
+

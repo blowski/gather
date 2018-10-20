@@ -1,0 +1,27 @@
+{% extends 'authenticated-base.html.twig' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h4 class="page-title">Gathering</h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('homegroup_show', {'id':homeGroup.id}) }}">{{ homeGroup.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gatherings</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <ul>
+                        {% for gathering in gatherings %}
+                            <li><a href="{{ url('gathering_show', {'id':gathering.id}) }}">{{ gathering.startDate|date('d M y') }} - {{ gathering.endDate|date('d M y') }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'authenticated-base.html.twig' %}
+
+{% block content %}
+
+
+        <div class="page-header">
+                <h4 class="page-title">Dashboard</h4>
+        </div>
+
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="card">
+                                <div class="card-header">
+                                        <h3 class="card-title">Your Homegroups</h3>
+                                        <div class="card-options">
+                                                <a href="{{ url('homegroup_join') }}" class="btn btn-primary btn-sm ml-2">Join a homegroup</a>
+                                                <a href="{{ url('homegroup_new_form') }}" class="btn btn-secondary btn-sm ml-2">Create new homegroup</a>
+                                        </div>
+                                </div>
+                                <div class="card-body">
+                                        <ul>
+                                            {% for homeGroup in homeGroups %}
+                                                    <li><a href="{{ url('homegroup_show', {'id':homeGroup.id}) }}">{{ homeGroup.name }}</a></li>
+                                            {% else %}
+                                                <p>#sadface - you haven't joined any homegroups yet</p>
+                                            {% endfor %}
+                                        </ul>
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+{% endblock content %}

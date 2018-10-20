@@ -1,0 +1,51 @@
+{% extends 'authenticated-base.html.twig' %}
+
+{% block content %}
+
+
+    <div class="page-header">
+        <h4 class="page-title">{{ homeGroup.name }}</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Members</h3>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        {% for member in homeGroup.members %}
+                            <li>{{ member.email }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p>Invite more people to join - give them this code: <b style="font-family:monospace;color:red;">{{ homeGroup.code }}</b>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Gatherings</h3>
+                    <div class="card-options">
+                        <a href="{{ url('gathering_new_form', {'id':homeGroup.id}) }}" class="btn btn-primary btn-sm ml-2">Organise a gathering</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul>
+                    {% for gathering in homeGroup.gatherings %}
+                        <li><a href="{{ url('gathering_show', {'id':gathering.id}) }}">{{ gathering.startDate|date('d M y') }} - {{ gathering.endDate|date('d M y') }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+

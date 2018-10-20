@@ -1,0 +1,23 @@
+{% extends 'authenticated-base.html.twig' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h4 class="page-title">Materials</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <ul>
+                        {% for material in materials %}
+                            <li><a href="{{ url('materials_update', {'id':material.id}) }}">{{ material }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

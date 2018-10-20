@@ -1,0 +1,57 @@
+version: '3.6'
+services:
+
+  app:
+    build:
+      context: ./
+      dockerfile: docker/app.dockerfile
+    image: dot_flow_app
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=database"
+      - "XDEBUG_CONFIG: remote_host=localhost"
+      - "PHP_IDE_CONFIG=serverName=localhost"
+
+  webserver:
+    image: nginx:1.15-alpine
+    volumes:
+     - ./docker/nginx.conf:/etc/nginx/conf.d/dot-flow.conf
+     - ./server.crt:/etc/ssl/certs/server.crt
+     - ./server.key:/etc/ssl/private/server.key
+     - ./:/app
+    ports:
+     - "8080:80"
+     - "8081:443"
+    environment:
+     - NGINX_HOST=dot-flow.test
+     - NGINX_PORT=80
+
+  app_dev:
+    build:
+      context: ./
+      dockerfile: docker/app-dev.dockerfile
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - ./docker/app_dev_php.ini:/usr/local/etc/php/php.ini
+    expose:
+      - 9000
+      - 9001
+    environment:
+#      - "DB_PORT=3306"
+#      - DB_HOST=database
+      XDEBUG_CONFIG: "idekey=PHPSTORM remote_host=172.19.0.1"
+      PHP_IDE_CONFIG: "serverName=dot_flow"
+      COMPOSER_ALLOW_SUPERUSER: 1
+
+  database:
+    image: mysql:5.6
+    restart: always
+    ports:
+      - "42333:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dot_flow

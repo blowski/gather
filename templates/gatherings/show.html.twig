@@ -1,0 +1,68 @@
+{% extends 'authenticated-base.html.twig' %}
+
+{% block content %}
+
+
+    <div class="page-header">
+        <h4 class="page-title">Gathering</h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('homegroup_show', {'id':gathering.homeGroup.id}) }}">{{ gathering.homeGroup.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('gathering_list', {'id':gathering.homeGroup.id}) }}">Gatherings</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ gathering.startDate|date('d M y') }} - {{ gathering.endDate|date('d M y') }}</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Passage</h3>
+                </div>
+                <div class="card-body">
+                    {{ gathering.passage | raw }}
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Study</h3>
+                </div>
+                <div class="card-body">
+                    {{ gathering.material.content | raw }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-offset-7 col-md-5 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="ms-body">
+
+                        <div class="msb-reply">
+                            {{ form_start(commentForm) }}
+                                {{ form_widget(commentForm.content, {'attr':{'placeholder':'What do you think?'}}) }}
+                                {{ form_widget(commentForm._token) }}
+                                <button type="submit" class="btn btn-primary ml-auto"><i class="fa fa-paper-plane-o"></i></button>
+                            {{ form_end(commentForm) }}
+                        </div>
+
+                        {% for comment in gathering.comments %}
+                        <div class="message-feed media">
+                            <div class="float-left pr-2">
+                                <img src="assets/images/faces/female/25.jpg" alt="" class="avatar avatar-md brround">
+                            </div>
+                            <div class="media-body">
+                                <div class="mf-content">
+                                    {{ comment.content }}
+                                </div>
+                                <small class="mf-date"><i class="fa fa-clock-o"></i> {{ comment.publishedAt | date('d/M/Y H:i') }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
