@@ -12,6 +12,7 @@ class GatheringType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name')
             ->add('material', null, [
                 'attr' => ['class' => 'select2'],
             ])
