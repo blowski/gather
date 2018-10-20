@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <ul>
                         {% for member in homeGroup.members %}
-                            <li>{{ member.email }}</li>
+                            <li>{{ member.screenName }}</li>
                         {% endfor %}
                     </ul>
                     <p>Invite more people to join - give them this code: <b style="font-family:monospace;color:red;">{{ homeGroup.code }}</b>.</p>

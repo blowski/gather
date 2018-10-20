@@ -20,9 +20,9 @@ class UserRegisterType extends AbstractType
             ->add('screenName')
             ->add('password', PasswordType::class)
             ->add('acceptGDPR', CheckboxType::class, [
-                'required' => true,
+                'required' => false,
                 'mapped' => false,
-                'label' => 'Accept GDPR gumf',
+                'label' => 'Sign up to marketing',
             ])
         ;
     }
